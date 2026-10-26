@@ -19,7 +19,7 @@ public class KayıtEkrani extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
-        // Kullanıcı Adı Etiket ve Alanı
+        // Kullanıcı Adı 
         JLabel lblKullaniciAdi = new JLabel("Kullanıcı Adı:");
         lblKullaniciAdi.setBounds(50, 50, 100, 25);
         getContentPane().add(lblKullaniciAdi);
@@ -28,7 +28,7 @@ public class KayıtEkrani extends JFrame {
         txtKullaniciAdi.setBounds(150, 50, 160, 25);
         getContentPane().add(txtKullaniciAdi);
 
-        // Şifre Etiket ve Alanı
+        // Şifre
         JLabel lblSifre = new JLabel("Şifre:");
         lblSifre.setBounds(50, 100, 100, 25);
         getContentPane().add(lblSifre);
@@ -47,13 +47,13 @@ public class KayıtEkrani extends JFrame {
         cmbRol.setBounds(150, 150, 160, 25);
         getContentPane().add(cmbRol);
 
-        // Kayıt Ol Butonu
-        JButton btnKayitOl = new JButton("Kayıt Ol");
-        btnKayitOl.setBounds(150, 200, 160, 30);
+        // Kayıt Butonu
+        JButton butonKayit1 = new JButton("Kayıt Ol");
+        butonKayit1.setBounds(150, 200, 160, 30);
         getContentPane().add(btnKayitOl);
 
         // Butona tıklama olayı (Bilgileri dosyaya kaydeder)
-        btnKayitOl.addActionListener(new ActionListener() {
+        butonKayit1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String kAdi = txtKullaniciAdi.getText().trim();
