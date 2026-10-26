@@ -55,7 +55,6 @@ public class GirisEkrani {
 					jf.getContentPane().add(buton2);
 					buton2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							// Uyarı mesajı yerine doğrudan KayitEkrani'ni açıyoruz:
 							new KayıtEkrani().setVisible(true);
 					    }
 					});
