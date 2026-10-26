@@ -202,3 +202,14 @@ Java JDK 21 ile VS Code'da src/model/Main.java dosyasını açıp Ctrl+F5 tuşla
 
 Main.java içindeki planId = 1 ve hedefDakika = 90 geçici örnek değerlerdir. Melike'nin CalismaPlani sınıfı gelince gerçek plan kimliği ve hedef süre oradan alınacak. Örnekteki dizi, ekibin çift yönlü bağlı listesine bağlanacak. Dört veri türünün tamamını kaydeden son dosya yönetimi de ortak modeller ve listeyle birlikte yapılacak.
 
+
+## İlk hafta geliştirme notları — Berfin
+Şu anki durum
+Bu hafta proje kapsamında Java Swing tabanlı grafik arayüzlerin temelleri atılmış ve ilk giriş ekranı tasarlanmıştır.
+
+Berfin'in yaptığı bölüm
+* **GirisEkrani.java:** Kullanıcıların uygulamaya giriş yapabilmesi için Java Swing kullanılarak tasarlanan ilk arayüz bileşeni ve temel giriş alanları.
+
+Birleştirme için sonraki adım
+Tasarlanan giriş ekranının, diğer ekip üyelerinin hazırlayacağı kullanıcı doğrulama servisleri ve veri yapılarıyla bütünleştirilmesi.
+
