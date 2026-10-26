@@ -1,3 +1,4 @@
+
 # METADS — Bireysel Çalışma Planı ve Hedef Takip Sistemi
 
 **Veri Yapıları Dersi · 2026 Güz Dönemi Projesi**
@@ -16,8 +17,7 @@ Proje Java ile Eclipse ortamında geliştirilmektedir. Kullanıcı arayüzü Swi
 ## Görev dağılımı
 
 Aşağıdaki dağılım sorumlulukları belirtir. Planlanan bütün sınıfların tamamlandığı anlamına gelmez.
-Görev dağılımları üyelerin geri bildirimlerine göre Melike tarafından yapay zeka yardımıyla belirlenmiştir. 
-Fakat ileride değişime açıktır. Bu da 'readme' dosyasının güncellenebileceği anlamına gelmektedir
+Görev dağılımı, üyelerin geri bildirimleri dikkate alınarak Melike tarafından yapay zekâ desteğiyle hazırlanmıştır. Ekip kararlarıyla güncellenebilir.
 
 | Üye | Sorumluluk |
 
@@ -90,18 +90,27 @@ Liste, düğümleri ve aralarındaki bağlantıları yönetir.
 
 **`ekle(T veri)` — Sona ekleme**
 
-Gelen veriyi taşıyan yeni bir düğüm oluşturulur. Liste boşsa `bas` ve `son` aynı düğümü gösterir. Liste boş değilse eski son ile yeni düğüm arasında iki yönlü bağlantı kurulur; ardından `son` güncellenir.
+`ekle(T veri)` listenin sonuna ekleme yapar:
 
-Her ekleme sonunda `boyut` bir artırılır.
+1. Veriyi taşıyan yeni bir düğüm oluşturulur.
+2. Liste boşsa `bas` ve `son` aynı düğümü gösterir.
+3. Liste boş değilse eski son ile yeni düğüm arasında ileri ve geri bağlantılar kurulur.
+4. `son`, yeni düğümü gösterecek şekilde güncellenir.
+5. Her iki durumda da `boyut` bir artırılır.
 
 **`dolas()` — İleri dolaşma**
 
-`bas` değiştirilmeden, geçici bir referansla düğümler ziyaret edilir ve taşıdıkları veriler konsola yazdırılır. Sonraki bağlantı `null` olduğunda dolaşma biter.
+`dolas()` ileri yönde dolaşır:
+
+1. Geçici referans başlangıçta `bas` düğümünü gösterir.
+2. Geçici referans `null` olmadığı sürece düğümün verisi yazdırılır.
+3. Geçici referans sonraki düğüme ilerletilir.
+4. Son düğüm de yazdırıldıktan sonra geçici referans `null` olur ve döngü biter.
 
 **Zaman maliyetleri:**
 
 - Sona ekleme: **O(1)** — son düğümü aramak gerekmez.
-- Dolaşma: **O(n)** — her düğüm ziyaret edilir.
+- Dolaşma: **O(n)** — her düğüm ziyaret edilir. Konsola yazdırmanın maliyeti ayrıca taşınan veriye bağlıdır.
 
 ### METADS_Plan.java
 
@@ -113,17 +122,14 @@ Ortak verilerin bütün servislere bağlanması henüz tamamlanmamıştır.
 
 ## Çalıştırılan denemeler
 
-| Deneme | Gözlenen sonuç |
+| Deneme |  Gözlenen sonuç |
 
-| Boş listeyi dolaşma | Hata veya veri çıktısı oluşmadı. |
 
-| İki plan ekleyip dolaşma | Planlar eklenme sırasıyla yazdırıldı. |
-
-| Bağımsız düğüm oluşturma | Plan bilgileri ve iki `null` bağlantı yazdırıldı. |
-
-| Hedef süreyi `0` yapma | `IllegalArgumentException` yakalandı. |
-
-| Geçersiz güncellemeden sonra süreyi okuma | Önceki hedef süre olan 90 dakika korundu. |
+- Boş listeyi dolaşma: Hata veya veri çıktısı oluşmadı.
+- İki plan ekleyip dolaşma: Planlar eklenme sırasıyla yazdırıldı.
+- Bağımsız düğüm oluşturma: Plan bilgileri ve iki `null` bağlantı yazdırıldı.
+- Hedef süreyi `0` yapma: `IllegalArgumentException` yakalandı.
+- Geçersiz güncellemeden sonra süreyi okuma: Önceki hedef süre olan 90 dakika korundu.
 
 Denemelerde kullanıcı kimliği `1` olan kullanıcı için iki örnek plan oluşturulmuştur:
 
@@ -161,11 +167,38 @@ Bu kontroller bütün olası durumları kapsamaz. Geri bağlantılar henüz bağ
 - Haftalık toplantıda çalışan bölümler birleştirilir ve herkes kendi katkısını açıklar.
 - Bütünleştirme sonrasında kod yeniden çalıştırılır; eksikler ve hatalar kaydedilir.
 - Her üye tamamladığı işleri ve deneme sonuçlarını README’ye ekler.
+- Ortak dosyalar düzenlenirken ekip üyeleri birbirini bilgilendirir.
 
 ## Alınan yardım
 
 Melike, görev dağılımını belirlemek ve readme kısmını oluşturmak için yapay zekadan yaralanmıştır.
 
-Doğrulamaların geliştirilmesinde; `Dugum`, bağlı listede ekleme/dolaşma ve başlangıç denemelerinde ChatGPT ve Gemini kod örnekleri ile açıklamalarından yararlanılmıştır. Hata düzeltme ve çalışma mantığının incelenmesinde de destek alınmıştır.
+Doğrulamaların geliştirilmesinde; `Dugum`, bağlı listede ekleme/dolaşma ve başlangıç denemelerinde ChatGPT ve Gemini kod örnekleri ile açıklamalarından yararlanılmıştır.
 
 Diğer üyeler kendi çalışmalarında yararlandıkları kaynakları ve destekleri ayrıca belirtecektir.
+
+## İlk hafta geliştirme notları — Diyar
+
+## Şu anki durum
+
+Bu depoda Diyar'ın 1. hafta için hazırladığı çalışan örnek bulunuyor. Örnek konsolda çalışıyor; son uygulamanın arayüzü ve diğer ekip parçaları henüz birleştirilmedi.
+
+## Diyar'ın yaptığı bölüm
+
+- [Kullanici.java](src/model/Kullanici.java): Kullanıcı numarası, adı, bölümü, sınıfı ve rolü gibi bilgileri tutuyor.
+- [CalismaKaydi.java](src/model/CalismaKaydi.java): Kayıt numarası, bağlı plan numarası, tarih ve çalışılan dakikayı tutuyor.
+- [GunlukOnay.java](src/model/GunlukOnay.java): Kullanıcı numarası, tarih ve günün onay durumunu tutuyor.
+- [Main.java](src/model/Main.java): Bu sınıfları kullanan 1. hafta örneği.
+
+Kimlikler int ve oluşturulduktan sonra değişmiyor. Tarihler LocalDate ile tutuluyor. Main.java, for döngüsüyle kayıtları geziyor ve if koşuluyla seçilen plan ve tarihe ait süreleri topluyor. Aynı plana ait 25 ve 35 dakikalık kayıtların toplamı 60 dakika. 90 dakikalık örnek hedefe göre ilerleme %66,7, kalan süre 30 dakika. Başka plana ait deneme kaydı toplama katılmıyor.
+
+Örnek, küçük bir kullanıcı verisini data/ornek-kullanici.metads metin dosyasına yazıp geri okuyor. Dosya program çalıştırılınca oluşur; bu yalnızca ilk hafta gösterimidir.
+
+## Çalıştırma
+
+Java JDK 21 ile VS Code'da src/model/Main.java dosyasını açıp Ctrl+F5 tuşlarına basın. Çıktının sonunda “Dosyadan okunan: Diyar” görünür.
+
+## Birleştirme için sonraki adım
+
+Main.java içindeki planId = 1 ve hedefDakika = 90 geçici örnek değerlerdir. Melike'nin CalismaPlani sınıfı gelince gerçek plan kimliği ve hedef süre oradan alınacak. Örnekteki dizi, ekibin çift yönlü bağlı listesine bağlanacak. Dört veri türünün tamamını kaydeden son dosya yönetimi de ortak modeller ve listeyle birlikte yapılacak.
+
