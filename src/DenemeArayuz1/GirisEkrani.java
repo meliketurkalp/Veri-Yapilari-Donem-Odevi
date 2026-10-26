@@ -53,6 +53,12 @@ public class GirisEkrani {
 					JButton buton2=new JButton("KAYIT OL");//gönder yazılı bir buton oluşturur
 					buton2.setBounds(200,170,100,30);
 					jf.getContentPane().add(buton2);
+					buton2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							// Uyarı mesajı yerine doğrudan KayitEkrani'ni açıyoruz:
+							new KayıtEkrani().setVisible(true);
+					    }
+					});
 					
 					//BUTONA TIKLANINCA NE OLACAK??
 					buton1.addActionListener(new ActionListener() {
