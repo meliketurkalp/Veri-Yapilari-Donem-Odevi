@@ -202,3 +202,25 @@ Java JDK 21 ile VS Code'da src/model/Main.java dosyasını açıp Ctrl+F5 tuşla
 
 Main.java içindeki planId = 1 ve hedefDakika = 90 geçici örnek değerlerdir. Melike'nin CalismaPlani sınıfı gelince gerçek plan kimliği ve hedef süre oradan alınacak. Örnekteki dizi, ekibin çift yönlü bağlı listesine bağlanacak. Dört veri türünün tamamını kaydeden son dosya yönetimi de ortak modeller ve listeyle birlikte yapılacak.
 
+## İlk hafta geliştirme notları — Ahmet
+
+[AramaDenemesi.java](src/tr/edu/inonubm/studyapp/deneme/AramaDenemesi.java), mevcut `CalismaPlani` modelini kullanarak plan kimliğine göre doğrusal arama yapan küçük bir konsol örneğidir.
+
+- Aynı kullanıcıya ait, kimlikleri `1` ve `2` olan iki plan bir dizide tutulur.
+- `for` döngüsü planları sırayla kontrol eder. Kimlik eşleşirse planın referansı saklanır ve `break` ile arama tamamlanır.
+- Sonuç varsa plan bilgileri, yoksa `Plan bulunamadi.` mesajı yazdırılır.
+- En kötü durumda bütün planlar kontrol edilir; aramanın zaman maliyeti O(n)'dir.
+
+### Çalıştırma ve deneme sonuçları
+
+Eclipse'te `AramaDenemesi.java` dosyasına sağ tıklayıp **Run As → Java Application** seçin. Çıktıyı **Console** bölümünde inceleyin.
+
+| Aranan plan kimliği | Kontrol edilen sonuç |
+| --- | --- |
+| `2` | Ağaç konulu, 45 dakika hedefli ikinci plan bulundu. |
+| `3` | `Plan bulunamadi.` mesajı yazdırıldı. |
+
+Kaynak dosyadaki başlangıç değeri `arananPlanId = 2` olarak bırakılmıştır. Bulunamayan durumu denemek için bu değer `3` yapılabilir.
+
+Bu ilk hafta örneği bellekteki küçük bir dizi üzerinde çalışır. Ortak bağlı listeye ve arayüze bağlantı sonraki adımlardadır. Kod örneği, açıklama ve kontrol aşamasında ChatGPT desteği alınmıştır.
+
