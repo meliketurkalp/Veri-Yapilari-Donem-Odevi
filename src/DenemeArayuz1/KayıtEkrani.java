@@ -3,23 +3,24 @@ package DenemeArayuz1;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class KayıtEkrani extends JFrame {
+public class KayitEkrani extends JFrame {
     private JTextField txtKullaniciAdi;
     private JPasswordField txtSifre;
     private JComboBox<String> cmbRol;
 
-    public KayıtEkrani() {
+    public KayitEkrani() {
         setTitle("METADS - Yeni Kullanıcı Kaydı");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
-        // Kullanıcı Adı 
         JLabel lblKullaniciAdi = new JLabel("Kullanıcı Adı:");
         lblKullaniciAdi.setBounds(50, 50, 100, 25);
         getContentPane().add(lblKullaniciAdi);
@@ -28,7 +29,6 @@ public class KayıtEkrani extends JFrame {
         txtKullaniciAdi.setBounds(150, 50, 160, 25);
         getContentPane().add(txtKullaniciAdi);
 
-        // Şifre
         JLabel lblSifre = new JLabel("Şifre:");
         lblSifre.setBounds(50, 100, 100, 25);
         getContentPane().add(lblSifre);
@@ -37,7 +37,6 @@ public class KayıtEkrani extends JFrame {
         txtSifre.setBounds(150, 100, 160, 25);
         getContentPane().add(txtSifre);
 
-        // Rol Seçimi (Öğrenci / Yönetici)
         JLabel lblRol = new JLabel("Rol:");
         lblRol.setBounds(50, 150, 100, 25);
         getContentPane().add(lblRol);
@@ -47,13 +46,11 @@ public class KayıtEkrani extends JFrame {
         cmbRol.setBounds(150, 150, 160, 25);
         getContentPane().add(cmbRol);
 
-        // Kayıt Butonu
-        JButton butonKayit1 = new JButton("Kayıt Ol");
-        butonKayit1.setBounds(150, 200, 160, 30);
+        JButton btnKayitOl = new JButton("Kayıt Ol");
+        btnKayitOl.setBounds(150, 200, 160, 30);
         getContentPane().add(btnKayitOl);
 
-        // Butona tıklama olayı (Bilgileri dosyaya kaydeder)
-        butonKayit1.addActionListener(new ActionListener() {
+        btnKayitOl.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String kAdi = txtKullaniciAdi.getText().trim();
@@ -64,12 +61,19 @@ public class KayıtEkrani extends JFrame {
                     JOptionPane.showMessageDialog(null, "Kullanıcı adı ve şifre boş bırakılamaz!", "Hata", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (kAdi.contains(":") || sifre.contains(":")) {
+                    JOptionPane.showMessageDialog(null, "Kullanıcı adı ve şifre ':' içeremez!", "Hata", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (kullaniciVarMi(kAdi)) {
+                    JOptionPane.showMessageDialog(null, "Bu kullanıcı adı zaten alınmış!", "Hata", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 try (PrintWriter out = new PrintWriter(new FileWriter("kullanicilar.txt", true))) {
-                    // Kullanıcı bilgilerini dosyaya alt alta yazar
                     out.println(kAdi + ":" + sifre + ":" + rol);
                     JOptionPane.showMessageDialog(null, "Kayıt Başarıyla Oluşturuldu: " + kAdi);
-                    dispose(); // Pencereyi kapatır
+                    dispose();
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "Dosya kaydedilirken hata oluştu: " + ex.getMessage(), "Hata", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
@@ -78,9 +82,24 @@ public class KayıtEkrani extends JFrame {
         });
     }
 
+    // Aynı kullanıcı adı daha önce kaydedilmiş mi?
+    private boolean kullaniciVarMi(String kAdi) {
+        try (BufferedReader br = new BufferedReader(new FileReader("kullanicilar.txt"))) {
+            String satir;
+            while ((satir = br.readLine()) != null) {
+                if (satir.split(":")[0].equals(kAdi)) {
+                    return true;
+                }
+            }
+        } catch (IOException ex) {
+            // dosya yoksa kullanıcı da yok
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new KayıtEkrani().setVisible(true);
+            new KayitEkrani().setVisible(true);
         });
     }
 }
